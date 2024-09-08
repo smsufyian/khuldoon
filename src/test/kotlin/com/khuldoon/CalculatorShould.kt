@@ -3,85 +3,49 @@ package com.khuldoon
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
-/*
-* Input should be from the file to the Calculator
-* Output should be produced to the file from the calculator
-*
-*
-* Tip: How can I test behaviour independently
-*      Dependencies
-* */
-
-
-// Fakes vs Stub
-// Test driven development
-
-
-//TODO: Calculator should also produce outout to the file
-
-class FakeFileReaderForAddition : Reader {
-    override fun read(): List<Int> {
-        return listOf(2,3)
-    }
-}
-
-class FakeFileReaderForSubstraction : Reader {
-    override fun read(): List<Int> {
-       return listOf(3,2)
-    }
-}
-
-class FakeFileReaderForMultipliccation : Reader {
-    override fun read(): List<Int> {
-        return listOf(5,4)
-    }
-}
-
-class FakeFileReaderForDivision : Reader {
-    override fun read(): List<Int> {
-        return listOf(20,5)
-    }
-}
-
-class FakeDatabaseReaderForAddition : Reader {
-    override fun read(): List<Int> {
-        TODO("Not yet implemented")
-    }
-}
-
-
-
 
 class CalculatorShould {
 
     @Test
     fun `add numbers`() {
-        val fakeFileReader = FakeFileReaderForAddition()
-        val calculator = Calculator(fakeFileReader)
+        val calculator = Calculator(object:Reader {
+            override fun read(): List<Int> {
+                return listOf(2, 3)
+            }
+        })
         val result = calculator.add()
         Assertions.assertEquals(5,result)
     }
 
     @Test
     fun `subtract numbers`() {
-        val fakeFileReader= FakeFileReaderForSubstraction()
-        val calculator = Calculator(fakeFileReader)
+        val calculator = Calculator(object:Reader{
+            override fun read(): List<Int> {
+                return listOf(3, 2)
+            }
+        })
         val result = calculator.substract()
         Assertions.assertEquals(1, result)
     }
 
     @Test
     fun `multiply numbers`() {
-        val fakeFileReader = FakeFileReaderForMultipliccation()
-        val calculator: Calculator = Calculator(fakeFileReader)
+        val calculator: Calculator = Calculator(object:Reader{
+            override fun read(): List<Int> {
+                return listOf(5, 4)
+            }
+        })
         val result: Int = calculator.multiply()
         Assertions.assertEquals(20, result)
     }
 
     @Test
     fun `divide numbers`() {
-        val fakeFileReaderForDivision = FakeFileReaderForDivision()
-        val calculator = Calculator(fakeFileReaderForDivision)
+        val calculator = Calculator(object:Reader{
+            override fun read(): List<Int> {
+                return listOf(20, 5)
+            }
+        })
         val result: Int = calculator.divide()
         Assertions.assertEquals(4, result)
     }
