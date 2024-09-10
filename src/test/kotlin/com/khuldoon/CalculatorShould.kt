@@ -35,6 +35,22 @@ class CalculatorShould {
         Assertions.assertEquals(5,result)
     }
 
+    //TODO
+    @Test
+    fun `add one positive number`() {
+        
+    } 
+
+    @Test
+    fun `add more then two positive numbers` () {
+        
+    }
+
+    @Test
+    fun `add positive and negative numbers`() {
+    
+    }
+
     @Test
     fun `subtract numbers`() {
         /**
@@ -76,6 +92,7 @@ class CalculatorShould {
         val result: Int = calculator.divide()
         Assertions.assertEquals(4, result)
     }
+
 
 }
 
